@@ -10,11 +10,20 @@ import UIKit
 
 final class UserBuilder {
 	
+	private let gistsBuilder: GistsBuilder
+	
+	///
+	init (gistsBuilder: GistsBuilder) {
+		self.gistsBuilder = gistsBuilder
+	}
+	
 	///
 	func build () -> UIViewController {
 		let view = UserView()
 		
-		let presenter = UserPresenter(view: view)
+		let router = UserRouter(viewController: view, gistsBuilder: gistsBuilder)
+		
+		let presenter = UserPresenter(view: view, router: router)
 		
 		view.delegate = presenter
 		

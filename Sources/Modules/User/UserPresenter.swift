@@ -13,9 +13,12 @@ final class UserPresenter {
 	
 	private weak var view: UserViewProtocol?
 	
+	private let router: UserRouterProtocol
+	
 	///
-	init (view: UserViewProtocol) {
+	init (view: UserViewProtocol, router: UserRouterProtocol) {
 		self.view = view
+		self.router = router
 	}
 	
 }
@@ -33,8 +36,7 @@ extension UserPresenter: UserViewDelegate {
 	
 	///
 	func toGistsTapped () {
-		// To Router
-		print("+")
+		router.presentGists()
 	}
 	
 }

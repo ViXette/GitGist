@@ -16,8 +16,28 @@ final class AppRegistry {
 		container.register(UserBuilder.self) {
 			resolver -> UserBuilder in
 			
-			return UserBuilder()
+			return UserBuilder(gistsBuilder: resolver.resolve())
 		}
+		
+		container.register(GistsBuilder.self) {
+			Resolver -> GistsBuilder in
+			
+			return GistsBuilder()
+		}
+	}
+	
+}
+
+// MARK: - Resolver
+extension Resolver {
+	
+	///
+	func resolve <T> () -> T{
+		guard let instance = resolve(T.self) else {
+			fatalError("Cannot resolve instance of `\(T.self)`.")
+		}
+		
+		return instance
 	}
 	
 }

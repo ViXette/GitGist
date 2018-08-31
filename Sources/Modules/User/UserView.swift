@@ -19,7 +19,7 @@ final class UserView: UIViewController {
 	private var toGists_button: UIButton!
 	
 	///
-	override func viewDidLoad() {
+	override func viewDidLoad () {
 		super.viewDidLoad()
 		
 		view.applyBackgroundWhite()
@@ -47,7 +47,7 @@ final class UserView: UIViewController {
 		
 		toGists_button.snp.makeConstraints { maker in
 			maker.centerX.equalTo(view.snp.centerX)
-			maker.centerY.equalTo(view.snp.centerY).offset(50)
+			maker.centerY.equalTo(view.snp.centerY).offset(70)
 			maker.width.equalTo(user_textField.snp.width)
 		}
 		
