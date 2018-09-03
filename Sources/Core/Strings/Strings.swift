@@ -12,6 +12,31 @@ import Foundation
 public final class Strings {
 	
 	///
+	public final class Error {
+		
+		///
+		public final class Networking {
+			
+			///
+			public class var unknown: String {
+				return Strings.localized("Error.Networking.unknown")
+			}
+			
+			///
+			public class var timedOut: String {
+				return Strings.localized("Error.Networking.timedOut")
+			}
+			
+			///
+			public class var unreachable: String {
+				return Strings.localized("Error.Networking.unreachable")
+			}
+			
+		}
+		
+	}
+	
+	///
 	public final class User {
 	
 		///

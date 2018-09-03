@@ -5,14 +5,21 @@
 //  Copyright © 2018 ViXette. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 
 final class GistRouter {
 	
+	private weak var viewController: UIViewController?
+	
+	///
+	init (viewController: UIViewController) {
+		self.viewController = viewController
+	}
+	
 }
 
 // MARK: - GistRouterProtocol
-extension GistRouter: GistRouterProtocol {
+extension GistRouter: GistsRouterProtocol {
 	
 }

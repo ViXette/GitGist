@@ -8,6 +8,6 @@
 import Foundation
 
 
-protocol GistRouterProtocol: class {
+protocol GistsRouterProtocol: class {
 	
 }

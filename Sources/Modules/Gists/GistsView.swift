@@ -15,6 +15,8 @@ final class GistsView: UITableViewController {
 	///
 	override func viewDidLoad () {
 		super.viewDidLoad()
+		
+		delegate.setup()
 	}
 	
 }

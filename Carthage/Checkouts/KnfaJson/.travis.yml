@@ -1,0 +1,31 @@
+language: objective-c
+osx_image: xcode9.1
+branches:
+  only:
+    - master
+env:
+  global:
+    - IOS_SCHEME="KnfaJson iOS"
+    - TVOS_SCHEME="KnfaJson tvOS"
+    - MACOS_SCHEME="KnfaJson macOS"
+    - WATCHOS_SCHEME="KnfaJson watchOS"
+  matrix:
+    - ACTION="TEST"
+      SCHEME="$IOS_SCHEME"
+      DESTINATION="OS=11.1,name=iPhone X"
+    - ACTION="TEST"
+      SCHEME="$TVOS_SCHEME"
+      DESTINATION="OS=11.1,name=Apple TV 4K"
+    - ACTION="TEST"
+      SCHEME="$MACOS_SCHEME"
+      DESTINATION="arch=x86_64"
+    - ACTION="BUILD"
+      SCHEME="$WATCHOS_SCHEME"
+      DESTINATION="OS=4.0,name=Apple Watch - 42mm"
+script:
+  - if [ $ACTION == "TEST" ]; then
+      xcodebuild -project KnfaJson.xcodeproj -scheme "$SCHEME" -destination "$DESTINATION" test;
+    else
+      xcodebuild -project KnfaJson.xcodeproj -scheme "$SCHEME" -destination "$DESTINATION" build;
+    fi
+  - bash <(curl -s https://codecov.io/bash)

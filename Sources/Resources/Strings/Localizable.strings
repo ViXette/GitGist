@@ -1,3 +1,7 @@
+"Error.Networking.unknown" = "Произошла ошибка";
+"Error.Networking.timedOut" = "Ответ от сервера не получек";
+"Error.Networking.unreachable" = "Произошла ошибка. Возможно отключена сеть.";
+
 "User.title" = "Пользователь Git";
 "User.placeholder" = "Введите Git аккаунт";
 "User.Button.title" = "Просмотр Gists";

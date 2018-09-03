@@ -7,12 +7,41 @@
 
 import Foundation
 import Swinject
+import Domain
+import Service
 
 
 final class AppRegistry {
 	
+	 private static let baseUrlName = "baseUrl"
+	
 	///
 	class func register(_ container: Container) {
+		
+		container.register(URL?.self, name: baseUrlName) {
+			resolver -> URL? in
+			
+			return URL(string: "https://api.github.com/")
+		}
+		
+		container.register(Networking.self) {
+			resolver -> Networking in
+			
+			return DefaultNetworking(baseUrl: resolver.resolve(baseUrlName))
+		}
+		
+		container.register(PageFetcher.self) {
+			resolver -> PageFetcher in
+			
+			return DefaultPageFetcher()
+		}
+		
+		container.register(GistsService.self) {
+			resolver -> GistsService in
+			
+			return DefaultGistsService(networking: resolver.resolve())
+		}
+		
 		container.register(UserBuilder.self) {
 			resolver -> UserBuilder in
 			
@@ -20,9 +49,9 @@ final class AppRegistry {
 		}
 		
 		container.register(GistsBuilder.self) {
-			Resolver -> GistsBuilder in
+			resolver -> GistsBuilder in
 			
-			return GistsBuilder()
+			return GistsBuilder(pageFetcher: resolver.resolve(), gistsService: resolver.resolve())
 		}
 	}
 	
@@ -35,6 +64,15 @@ extension Resolver {
 	func resolve <T> () -> T{
 		guard let instance = resolve(T.self) else {
 			fatalError("Cannot resolve instance of `\(T.self)`.")
+		}
+		
+		return instance
+	}
+	
+	///
+	func resolve <T> (_ name: String) -> T {
+		guard let instance = resolve(T.self, name: name) else {
+			fatalError("Cannot resolve instance of `\(T.self)` with name `\(name)`.")
 		}
 		
 		return instance
